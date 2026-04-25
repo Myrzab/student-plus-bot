@@ -1,7 +1,7 @@
 const TelegramBot = require('node-telegram-bot-api');
 
 // 🔑 TOKEN (өзгерту ұсынылады!)
-const bot = new TelegramBot(process.env.8450934511:AAFOg_JGiRLl3dMGhBQL0XJHIxGB0ozHqZg, { polling: true });
+const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: true });
 
 
 // /start
