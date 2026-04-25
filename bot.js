@@ -1,293 +1,108 @@
-HEAD
-const TelegramBot = require("node-telegram-bot-api");
+const TelegramBot = require('node-telegram-bot-api');
 
-const bot = new TelegramBot("8450934511:AAFOg_JGiRLl3dMGhBQL0XJHIxGB0ozHqZg", { polling: true });
+// 🔑 TOKEN (өзгерту ұсынылады!)
+const bot = new TelegramBot("TOKEN", { polling: true });
 
-// /start команда
+
+// /start
 bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
 
-  bot.sendMessage(chatId,
-`🎓 Student+ ботына қош келдің!
-
-Бағдарламалауды үйренгің келе ме?  
-Сұрақтардың бірін таңда 👇`,
-    {
-      reply_markup: {
-        keyboard: [
-          ["📘 HTML деген не?", "🎨 CSS не үшін керек?"],
-          ["⚙️ JavaScript не істейді?"],
-          ["💻 Қалай программист болам?"],
-          ["🚀 Student+ деген не?"],
-          ["🌐 Сайтқа өту"]
-        ],
-        resize_keyboard: true
-      }
-    }
+  bot.sendMessage(
+    chatId,
+    "🚀 Student+ платформасына қош келдің!\n\n" +
+    "Бұл — бағдарламалауды жүйелі түрде үйренуге арналған бот.\n\n" +
+    "Төмендегі командаларды жаз:\n\n" +
+    "📘 html — HTML\n" +
+    "🎨 css — CSS\n" +
+    "⚙️ js — JavaScript\n" +
+    "💻 dev — программист болу\n" +
+    "🚀 student — Student+ туралы\n" +
+    "🌐 site — сайт"
   );
 });
 
-// Негізгі логика
+
+// хабарламалар
 bot.on("message", (msg) => {
   const chatId = msg.chat.id;
-  const text = msg.text;
 
-  // HTML
-  if (text === "📘 HTML деген не?") {
-    bot.sendMessage(chatId,
-`📘 HTML деген не?
+  // ❗️ қорғаныс (кейде text болмайды)
+  if (!msg.text) return;
 
-HTML — сайттың қаңқасы.
+  const text = msg.text.toLowerCase();
 
-Яғни барлық сайттар ең алдымен HTML арқылы жасалады:
-• текст  
-• сурет  
-• кнопка  
-
-💡 Егер программист болғың келсе — осыдан бастайсың.`
+  if (text === "html") {
+    bot.sendMessage(
+      chatId,
+      "📘 HTML — веб-сайттың негізі.\n\n" +
+      "HTML арқылы:\n" +
+      "• мәтін\n" +
+      "• сурет\n" +
+      "• батырмалар\n\n" +
+      "💡 Барлығы осыдан басталады."
     );
   }
 
-  // CSS
-  else if (text === "🎨 CSS не үшін керек?") {
-    bot.sendMessage(chatId,
-`🎨 CSS не үшін керек?
-
-CSS — сайттың дизайнын жасайды.
-
-HTML — қаңқа болса, CSS — оның сыртқы көрінісі:
-🔵 түстер  
-📏 өлшем  
-✨ анимация  
-
-💡 CSS болмаса сайт өте қарапайым көрінеді.`
+  else if (text === "css") {
+    bot.sendMessage(
+      chatId,
+      "🎨 CSS — дизайн.\n\n" +
+      "• түстер\n" +
+      "• стиль\n" +
+      "• layout\n\n" +
+      "✨ Сайтты әдемі етеді."
     );
   }
 
-  // JS
-  else if (text === "⚙️ JavaScript не істейді?") {
-    bot.sendMessage(chatId,
-`⚙️ JavaScript не істейді?
-
-JavaScript — сайтқа “жан” береді.
-
-Ол арқылы:
-✔️ кнопкалар жұмыс істейді  
-✔️ форма тексеріледі  
-✔️ динамика пайда болады  
-
-💡 Қазіргі барлық сайттар JavaScript қолданады.`
+  else if (text === "js") {
+    bot.sendMessage(
+      chatId,
+      "⚙️ JavaScript — логика.\n\n" +
+      "• кнопкалар\n" +
+      "• тексеру\n" +
+      "• динамика\n\n" +
+      "🔥 Негізгі технология."
     );
   }
 
-  // қалай программист болу
-  else if (text === "💻 Қалай программист болам?") {
-    bot.sendMessage(chatId,
-`💻 Қалай программист болам?
-
-Дұрыс жол:
-
-1️⃣ HTML  
-2️⃣ CSS  
-3️⃣ JavaScript  
-4️⃣ React  
-5️⃣ Backend  
-
-❗ Қате: бірден күрделі нәрсеге өту  
-✅ Дұрыс: біртіндеп үйрену  
-
-🚀 Student+ осы жолды жеңілдетеді`
+  else if (text === "dev") {
+    bot.sendMessage(
+      chatId,
+      "💻 Программист болу жолы:\n\n" +
+      "1. HTML\n" +
+      "2. CSS\n" +
+      "3. JavaScript\n" +
+      "4. React\n" +
+      "5. Backend\n\n" +
+      "🚀 Біртіндеп үйрен!"
     );
   }
 
-  // student+
-  else if (text === "🚀 Student+ деген не?") {
-    bot.sendMessage(chatId,
-`🚀 Student+ деген не?
-
-Student+ — бағдарламалауды оңай әрі жүйелі үйрететін платформа.
-
-Мұнда сен:
-✔️ Қайдан бастау керегін түсінесің  
-✔️ Қадам-қадаммен үйренесің  
-✔️ Практика жасайсың  
-
-📦 Бағдарлама:
-
-🔓 Тегін:
-• HTML  
-• CSS  
-• JavaScript  
-
-🔒 Student:
-• SQL  
-• React  
-
-🔴 Pro:
-• Backend (Node.js, API)
-
-💡 Бұл жай курс емес — бұл сенің дамуың.`
+  else if (text === "student") {
+    bot.sendMessage(
+      chatId,
+      "🚀 Student+ платформасы\n\n" +
+      "• дұрыс бағыт\n" +
+      "• жүйелі оқу\n" +
+      "• практика\n\n" +
+      "💡 Сенің IT жолың!"
     );
   }
 
-  // сайт
-  else if (text === "🌐 Сайтқа өту") {
-    bot.sendMessage(chatId,
-`🌐 Сайтқа өту:
-
-https://senin-saityn.kz
-
-💡 Мұнда толық оқу платформасы бар 🚀`
+  else if (text === "site") {
+    bot.sendMessage(
+      chatId,
+      "🌐 https://senin-saityn.kz"
     );
   }
 });
 
+
+// ✅ Render үшін (МІНДЕТТІ)
 const http = require("http");
 
 http.createServer((req, res) => {
   res.writeHead(200, { "Content-Type": "text/plain" });
-  res.end("Bot is running 🚀");
+  res.end("Bot is running");
 }).listen(process.env.PORT || 3000);
-
-const TelegramBot = require("node-telegram-bot-api");
-
-const bot = new TelegramBot("8450934511:AAFOg_JGiRLl3dMGhBQL0XJHIxGB0ozHqZg", { polling: true });
-
-// /start команда
-bot.onText(/\/start/, (msg) => {
-  const chatId = msg.chat.id;
-
-  bot.sendMessage(chatId,
-`🎓 Student+ ботына қош келдің!
-
-Бағдарламалауды үйренгің келе ме?  
-Сұрақтардың бірін таңда 👇`,
-    {
-      reply_markup: {
-        keyboard: [
-          ["📘 HTML деген не?", "🎨 CSS не үшін керек?"],
-          ["⚙️ JavaScript не істейді?"],
-          ["💻 Қалай программист болам?"],
-          ["🚀 Student+ деген не?"],
-          ["🌐 Сайтқа өту"]
-        ],
-        resize_keyboard: true
-      }
-    }
-  );
-});
-
-// Негізгі логика
-bot.on("message", (msg) => {
-  const chatId = msg.chat.id;
-  const text = msg.text;
-
-  // HTML
-  if (text === "📘 HTML деген не?") {
-    bot.sendMessage(chatId,
-`📘 HTML деген не?
-
-HTML — сайттың қаңқасы.
-
-Яғни барлық сайттар ең алдымен HTML арқылы жасалады:
-• текст  
-• сурет  
-• кнопка  
-
-💡 Егер программист болғың келсе — осыдан бастайсың.`
-    );
-  }
-
-  // CSS
-  else if (text === "🎨 CSS не үшін керек?") {
-    bot.sendMessage(chatId,
-`🎨 CSS не үшін керек?
-
-CSS — сайттың дизайнын жасайды.
-
-HTML — қаңқа болса, CSS — оның сыртқы көрінісі:
-🔵 түстер  
-📏 өлшем  
-✨ анимация  
-
-💡 CSS болмаса сайт өте қарапайым көрінеді.`
-    );
-  }
-
-  // JS
-  else if (text === "⚙️ JavaScript не істейді?") {
-    bot.sendMessage(chatId,
-`⚙️ JavaScript не істейді?
-
-JavaScript — сайтқа “жан” береді.
-
-Ол арқылы:
-✔️ кнопкалар жұмыс істейді  
-✔️ форма тексеріледі  
-✔️ динамика пайда болады  
-
-💡 Қазіргі барлық сайттар JavaScript қолданады.`
-    );
-  }
-
-  // қалай программист болу
-  else if (text === "💻 Қалай программист болам?") {
-    bot.sendMessage(chatId,
-`💻 Қалай программист болам?
-
-Дұрыс жол:
-
-1️⃣ HTML  
-2️⃣ CSS  
-3️⃣ JavaScript  
-4️⃣ React  
-5️⃣ Backend  
-
-❗ Қате: бірден күрделі нәрсеге өту  
-✅ Дұрыс: біртіндеп үйрену  
-
-🚀 Student+ осы жолды жеңілдетеді`
-    );
-  }
-
-  // student+
-  else if (text === "🚀 Student+ деген не?") {
-    bot.sendMessage(chatId,
-`🚀 Student+ деген не?
-
-Student+ — бағдарламалауды оңай әрі жүйелі үйрететін платформа.
-
-Мұнда сен:
-✔️ Қайдан бастау керегін түсінесің  
-✔️ Қадам-қадаммен үйренесің  
-✔️ Практика жасайсың  
-
-📦 Бағдарлама:
-
-🔓 Тегін:
-• HTML  
-• CSS  
-• JavaScript  
-
-🔒 Student:
-• SQL  
-• React  
-
-🔴 Pro:
-• Backend (Node.js, API)
-
-💡 Бұл жай курс емес — бұл сенің дамуың.`
-    );
-  }
-
-  // сайт
-  else if (text === "🌐 Сайтқа өту") {
-    bot.sendMessage(chatId,
-`🌐 Сайтқа өту:
-
-https://senin-saityn.kz
-
-💡 Мұнда толық оқу платформасы бар 🚀`
-    );
-  }
-});
